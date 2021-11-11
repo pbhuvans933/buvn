@@ -1,0 +1,247 @@
+1.Create student class having stdID , stdName, stdClass and display the information of two objects 
+package com.sonataassignment2;
+
+public class Student { 
+	int stdID;
+	String stdName;
+	String stdclass;
+	
+	public void display() {
+		System.out.println("Student ID " +stdID);
+		System.out.println("Student name "+stdName);
+		System.out.println("Student class "+stdclass);
+		
+	}
+	public static void main(String[] args) {
+		Student s1 = new Student();
+		s1.stdID=01;
+		s1.stdName="Bhuvan";
+		s1.stdclass="10th";
+		s1.display();
+		
+		Student s2 = new Student();
+		s2.stdID=03;
+		s2.stdName="pawan";
+		s2.stdclass="10th";
+		s2.display();
+	}
+
+} 
+
+
+2.Create a product class The properties are ProID, ProName, ProPrice display the information and ProPrice will be added additional tax of GST 
+package com.sonataassignment2;
+
+public class Product {
+	int proid;
+	String Proname;
+	double Proprice;
+public void display() {
+	System.out.println("Product id "+proid);
+	System.out.println("Product name "+Proname);
+	System.out.println("Product Price "+Proprice);
+	
+}
+public double Gst() {
+	System.out.println("product with additional tax of GST is ");
+	return Proprice+(Proprice*0.19);
+	
+}
+public static void main(String[] args)
+{
+	Product p = new Product();
+		p.proid=2568;
+	    p.Proname="nike";
+	    p.Proprice=1000;
+	    p.display();
+	    System.out.println(p.Gst());
+	
+}
+} 
+
+3.Create a T-Shirt  class with the following fields. 
+package com.sonataassignment2;
+
+public class Tshirt {
+
+		String Color;
+		String Material;
+		String Design;
+		int Size;
+		
+		Tshirt(){
+			System.out.println("This is Small Sized-Tshirt\n");
+		};
+		
+		Tshirt(String c, String m, String d, int s){
+			this.Color = c;
+			this.Material = m;
+			this.Design = d;
+			this.Size = s;
+			System.out.println("This is Medium Sized-Tshirt\n");
+		}
+		
+		Tshirt(String c, String m, String d){
+			this.Color  = c;
+			this.Material = m;
+			this.Design = d;
+			this.Size = 40;
+			System.out.println("This is Large Sized-Tshirt\n");
+		}
+
+		public void display(){
+			System.out.println("Color : "+Color);
+			System.out.println("Material : "+Material);
+			System.out.println("Design : "+Design);
+			System.out.println("Size : "+Size+"\n");
+		}
+
+		public static void main(String[] args) {
+			Tshirt Small = new Tshirt();
+			Small.Color = "Yellow";
+			Small.Material = "Cotton";
+			Small.Design = "Casual";
+			Small.Size = 30;
+			Small.display();
+			
+			Tshirt Medium = new Tshirt("Red","Polyster","Sports",34);
+			Medium.display();
+			
+			Tshirt Large = new Tshirt("Green","Nylon","Jersy");
+			Large.display();
+			
+		}
+
+}  
+
+Inheritance assignment : 
+
+package com.sonataproject;
+
+public class Car {
+	int speed;
+	double regularPrice;
+	String color;
+	Car(){};
+	Car(int speed,double regularPrice,String color)
+	{
+		this.speed=speed;
+		this.regularPrice=regularPrice;
+		this.color=color;
+	}
+	double getSalePrice() {
+		return regularPrice;
+	}
+	public void display() {
+		System.out.println("Speed : "+speed);
+		System.out.println("Regular Price : "+regularPrice);
+		System.out.println("Color : "+color);
+
+
+	}
+}	
+
+
+package com.sonataproject;
+
+public class Truck extends Car{
+	
+	int weight;
+	Truck(){};
+	Truck(int speed,double regularPrice,String color,int weight)
+	 {
+		 super(speed,regularPrice,color);
+		 this.weight=weight;
+	 }
+	double getSalePrice() {
+		if(weight>2000)
+			return regularPrice-((regularPrice*10)/100);
+		return regularPrice-((regularPrice*20)/100);
+	}
+	public void display() {
+		super.display();
+		System.out.println("Weight : "+weight);
+	}
+	
+} 
+
+package com.sonataproject;
+
+public class Ford extends Car{
+	 int year;
+	 int manufacturerDiscount;
+	 Ford(){};
+	 Ford(int speed,double regularPrice,String color,int year,int manufacturerDiscount)
+	 {
+		 super(speed,regularPrice,color);
+		 this.year=year;
+		 this.manufacturerDiscount=manufacturerDiscount;
+	 }
+	 double getSalePrice() {
+		 return regularPrice-((regularPrice*manufacturerDiscount)/100);
+	 }
+	 public void display() {
+			super.display();
+			System.out.println("Year : "+year);
+			System.out.println("Manufacturer's Discount : "+manufacturerDiscount);
+		}
+}
+
+package com.sonataproject;
+
+class Sedan extends Car{
+	 int length;
+	 Sedan(){};
+	 Sedan(int speed,double regularPrice,String color,int length)
+	 {
+		 super(speed,regularPrice,color);
+		 this.length=length;
+	 }
+	 double getSalePrice() {
+		 super.getSalePrice();
+		 if(length>20)
+			 return regularPrice-((regularPrice*5)/100);
+		 return regularPrice-((regularPrice*10)/100);
+	 }
+	 public void display() {
+			super.display();
+			System.out.println("Length : "+length);
+		}
+}
+ 
+
+package com.sonataproject;
+
+public class MyAutoShopProjectClass {
+
+	public static void main(String[] args) {
+		Sedan s1 = new Sedan(100,50000,"blue",25);
+		double saleprice = s1.getSalePrice();
+		s1.display();
+		System.out.println("Sale Price : "+saleprice);
+		System.out.println();
+		
+		Ford f1 = new Ford(200,40000,"silver",2010,15);
+		double salepriceford=f1.getSalePrice();
+		f1.display();
+		System.out.println("Sale Price : "+salepriceford);
+		System.out.println();
+		
+		Ford f2 = new Ford(250,70000,"white",2016,8);
+		double salepriceford2=f2.getSalePrice();
+		f2.display();
+		System.out.println("Sale Price : "+salepriceford2);
+		System.out.println();
+		
+		Car c1 = new Car(120,40000,"red");
+		double cprice=c1.getSalePrice();
+		c1.display();
+		System.out.println("Sale Price : "+cprice);
+		System.out.println();
+		
+
+	}
+
+}
+
+
